@@ -1,9 +1,9 @@
 # charmant
 
-<p align='center'>
-<a href='https://www.npmjs.com/package/charmant'>
-<img src="https://img.shields.io/bundlephobia/minzip/charmant?color=green" />
-</a>
+<p>
+  <a href='https://www.npmjs.com/package/charmant'>
+    <img src="https://img.shields.io/bundlephobia/minzip/charmant?color=green" />
+  </a>
 </p>
 
 **charmant** is a small CSS-in-JS library written for React.
