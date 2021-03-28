@@ -1,0 +1,1 @@
+export { chic } from "./chic";
