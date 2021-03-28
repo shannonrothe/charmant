@@ -2,6 +2,7 @@
   "name": "charmant",
   "version": "0.1.0",
   "description": "Small CSS-in-JS React library",
+  "repository": "shannonrothe/charmant",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
@@ -14,9 +15,15 @@
     "analyze": "size-limit --why",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "react",
+    "css-in-js"
+  ],
+  "author": {
+    "name": "Shannon Rothe",
+    "email": "shannon.michael.rothe@gmail.com"
+  },
+  "license": "MIT",
   "peerDependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
