@@ -74,7 +74,27 @@ const styledFactory = <T>(tag: keyof HTMLElementTagNameMap, theme?: T) => {
   };
 };
 
+const createAnimation = (frames: Keyframes) => {
+  const animationName = `a${nextId()}`;
+  let k = `@keyframes ${animationName}{`;
+  for (const key in frames) {
+    const properties = frames[key];
+    k += `${key}{`;
+    for (const attribute in properties) {
+      const val = properties[attribute];
+      k += `${attribute}:${val};`;
+    }
+    k += "}";
+  }
+  k += "}";
+
+  styleNode.appendChild(document.createTextNode(k));
+
+  return animationName;
+};
+
 type ExpressionList<T> = (string | ((theme: T) => string))[];
+type Keyframes = { [key: string]: { [key: string]: string | number } };
 
 export const charmant = <T>(theme?: T) => {
   const styled = (tag: keyof HTMLElementTagNameMap) => (
@@ -82,5 +102,7 @@ export const charmant = <T>(theme?: T) => {
     ...expressions: ExpressionList<T>
   ) => styledFactory<T>(tag, theme)(styles, ...expressions);
 
-  return { styled };
+  const keyframes = (frames: Keyframes) => createAnimation(frames);
+
+  return { styled, keyframes };
 };
