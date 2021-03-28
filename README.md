@@ -1,8 +1,8 @@
-# chic
+# charmant
 
-**chic** is a small CSS-in-JS library written for React.
+**charmant** is a small CSS-in-JS library written for React.
 
-chic comes batteries-included with the following features:
+charmant comes batteries-included with the following features:
 
 - ⚡️ Custom theming
 - 🔥 Pseudo-selectors
@@ -15,24 +15,24 @@ chic comes batteries-included with the following features:
 **yarn**
 
 ```sh
-yarn add chic
+yarn add charmant
 ```
 
 **npm**
 
 ```sh
-npm install chic
+npm install charmant
 ```
 
 ## Usage
 
-To get started with **chic**, call the `chic` function and provide an optional theme. This function returns a `styled` function which you can use to create your React components.
+To get started with **charmant**, call the `charmant` function and provide an optional theme. This function returns a `styled` function which you can use to create your React components.
 
 ```tsx
 import React from "react";
-import { chic } from "chic";
+import { charmant } from "charmant";
 
-const { styled } = chic();
+const { styled } = charmant();
 
 const Box = styled("div")`
   width: 100%;
@@ -47,13 +47,13 @@ export default function App() {
 
 ### Theming
 
-Providing a theme object to the `chic` function will allow you to resolve theme values in your components.
+Providing a theme object to the `charmant` function will allow you to resolve theme values in your components.
 
 ```tsx
 import React from "react";
-import { chic } from "chic";
+import { charmant } from "charmant";
 
-const { styled } = chic({
+const { styled } = charmant({
   colors: {
     blue: "#0000ff",
   },
@@ -72,10 +72,10 @@ export default function App() {
 
 ### Pseudo-selectors
 
-Sometimes you want to target pseudo properties on your components such as `hover` or `focus`. You can do that too in **chic** – just add them to your defintions:
+Sometimes you want to target pseudo properties on your components such as `hover` or `focus`. You can do that too in **charmant** – just add them to your defintions:
 
 ```tsx
-const { styled } = chic({
+const { styled } = charmant({
   colors: {
     blue: "#0000ff",
     red: "#ff0000",

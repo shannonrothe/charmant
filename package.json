@@ -1,5 +1,5 @@
 {
-  "name": "chic",
+  "name": "charmant",
   "version": "0.1.0",
   "description": "Small CSS-in-JS React library",
   "main": "dist/index.js",
@@ -23,11 +23,11 @@
   },
   "size-limit": [
     {
-      "path": "dist/chic.cjs.production.min.js",
+      "path": "dist/charmant.cjs.production.min.js",
       "limit": "5 KB"
     },
     {
-      "path": "dist/chic.esm.js",
+      "path": "dist/charmant.esm.js",
       "limit": "5 KB"
     }
   ],

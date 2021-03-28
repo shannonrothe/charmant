@@ -1,1 +1,1 @@
-export { chic } from "./chic";
+export { charmant } from "./charmant";

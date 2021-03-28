@@ -13,7 +13,7 @@ export type ErrorMessage =
 export const getError = (error: ErrorMessage) => {
   switch (error.type) {
     case Error.RESOLVE:
-      return `Could not resolve theme value for tag ${error.tag} as no theme was provided. Please ensure you pass a theme to \`chic()\` or set a theme globally with \`theme()\`.`;
+      return `Could not resolve theme value for tag ${error.tag} as no theme was provided. Please ensure you pass a theme to \`charmant()\` if you wish to access values in your components.`;
     case Error.SEMI_COLON:
       const multiple = error.lines.length > 1;
       return `\tThe following line${multiple ? "s" : ""} for tag '${

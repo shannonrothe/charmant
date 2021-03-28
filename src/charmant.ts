@@ -1,6 +1,6 @@
 import React from "react";
 import { Error, getError } from "./errors";
-import { ChicProps } from "./types";
+import { CharmantProps } from "./types";
 import {
   appendClassToStyle,
   isPropertyLineWithoutSemiColon,
@@ -69,14 +69,14 @@ const styledFactory = <T>(tag: keyof HTMLElementTagNameMap, theme?: T) => {
     return ({
       children,
       ...props
-    }: ChicProps<HTMLElementTagNameMap[typeof tag]>) =>
+    }: CharmantProps<HTMLElementTagNameMap[typeof tag]>) =>
       React.createElement(tag, { ...props, children, className });
   };
 };
 
 type ExpressionList<T> = (string | ((theme: T) => string))[];
 
-export const chic = <T>(theme?: T) => {
+export const charmant = <T>(theme?: T) => {
   const styled = (tag: keyof HTMLElementTagNameMap) => (
     styles: TemplateStringsArray,
     ...expressions: ExpressionList<T>
