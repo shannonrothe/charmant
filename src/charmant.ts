@@ -1,4 +1,5 @@
 import React from "react";
+import { createAnimation, KeyframeOptions, Keyframes } from "./animation/index";
 import { Error, getError } from "./errors";
 import { CharmantProps } from "./types";
 import {
@@ -40,13 +41,17 @@ const parseExpressions = <T>(
     .filter(Boolean)
     .join("");
 
-const styledFactory = <T>(tag: keyof HTMLElementTagNameMap, theme?: T) => {
+const styledFactory = <T>(tag: keyof HTMLElementTagNameMap, theme?: T, animations?: string[]) => {
   return (styles: TemplateStringsArray, ...expressions: ExpressionList<T>) => {
     let css = styles[0];
     const className = `c${nextId()}`;
 
     expressions.length > 0 &&
       (css = parseExpressions(tag, css, styles, expressions, theme));
+
+    if (animations) {
+      css += `animation: ${animations.join(', ')};\n`;
+    }
 
     errors.forEach((err) => console.warn(err));
     errors = [];
@@ -77,10 +82,14 @@ const styledFactory = <T>(tag: keyof HTMLElementTagNameMap, theme?: T) => {
 type ExpressionList<T> = (string | ((theme: T) => string))[];
 
 export const charmant = <T>(theme?: T) => {
-  const styled = (tag: keyof HTMLElementTagNameMap) => (
+  const keyframes = (frames: Keyframes, opts?: KeyframeOptions) => createAnimation(styleNode, frames, opts);
+
+  const styled = (tag: keyof HTMLElementTagNameMap, animations?: string[]) => (
     styles: TemplateStringsArray,
     ...expressions: ExpressionList<T>
-  ) => styledFactory<T>(tag, theme)(styles, ...expressions);
+  ) => {
+    return styledFactory<T>(tag, theme, animations)(styles, ...expressions);
+  };
 
-  return { styled };
+  return { styled, keyframes };
 };
