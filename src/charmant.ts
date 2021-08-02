@@ -1,4 +1,5 @@
 import React from "react";
+import { createAnimation, KeyframeOptions, Keyframes } from "./animation/index";
 import { Error, getError } from "./errors";
 import { CharmantProps } from "./types";
 import {
@@ -40,13 +41,17 @@ const parseExpressions = <T>(
     .filter(Boolean)
     .join("");
 
-const styledFactory = <T>(tag: keyof HTMLElementTagNameMap, theme?: T) => {
+const styledFactory = <T>(tag: keyof HTMLElementTagNameMap, theme?: T, animations?: string[]) => {
   return (styles: TemplateStringsArray, ...expressions: ExpressionList<T>) => {
     let css = styles[0];
     const className = `c${nextId()}`;
 
     expressions.length > 0 &&
       (css = parseExpressions(tag, css, styles, expressions, theme));
+
+    if (animations) {
+      css += `animation: ${animations.join(', ')};\n`;
+    }
 
     errors.forEach((err) => console.warn(err));
     errors = [];
@@ -74,35 +79,17 @@ const styledFactory = <T>(tag: keyof HTMLElementTagNameMap, theme?: T) => {
   };
 };
 
-const createAnimation = (frames: Keyframes) => {
-  const animationName = `a${nextId()}`;
-  let k = `@keyframes ${animationName}{`;
-  for (const key in frames) {
-    const properties = frames[key];
-    k += `${key}{`;
-    for (const attribute in properties) {
-      const val = properties[attribute];
-      k += `${attribute}:${val};`;
-    }
-    k += "}";
-  }
-  k += "}";
-
-  styleNode.appendChild(document.createTextNode(k));
-
-  return animationName;
-};
-
 type ExpressionList<T> = (string | ((theme: T) => string))[];
-type Keyframes = { [key: string]: { [key: string]: string | number } };
 
 export const charmant = <T>(theme?: T) => {
-  const styled = (tag: keyof HTMLElementTagNameMap) => (
+  const keyframes = (frames: Keyframes, opts?: KeyframeOptions) => createAnimation(styleNode, frames, opts);
+
+  const styled = (tag: keyof HTMLElementTagNameMap, animations?: string[]) => (
     styles: TemplateStringsArray,
     ...expressions: ExpressionList<T>
-  ) => styledFactory<T>(tag, theme)(styles, ...expressions);
-
-  const keyframes = (frames: Keyframes) => createAnimation(frames);
+  ) => {
+    return styledFactory<T>(tag, theme, animations)(styles, ...expressions);
+  };
 
   return { styled, keyframes };
 };
